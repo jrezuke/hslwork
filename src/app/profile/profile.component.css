@@ -1,0 +1,12 @@
+table, th, td {
+   border: 1px solid darkgray;
+}
+
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+
+.altRow{
+    background-color: lightblue;
+}

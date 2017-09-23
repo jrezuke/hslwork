@@ -1,0 +1,108 @@
+<div [@visibility]="state">
+	<div class="panel panel-info">
+		<div class="pnl-heading" >Edit Group</div>
+		<div class="panel-body">Edit the description and add or remove members (admins only).</div>
+	</div>
+	<div class="tab-container">
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#1a">Details</a></li>
+			<li><a data-toggle="tab" href="#2a">Members</a></li>
+		</ul>
+
+		<div class="tab-content clearfix">
+			<div class="tab-pane fade in active" id="1a">
+
+					<form novalidate #groupForm="ngForm">
+						<div class="form-group">
+							<label for="name" class="control-label">Name:</label>
+								<input readonly="readonly" type="text" class="form-control" [(ngModel)]="group.name" name="name" required placeholder="Name" #name="ngModel">
+								<small [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                                Name is required
+                            </small>
+						</div>
+						<div class="form-group">
+							<label for="name" class="control-label">Description:</label>
+								<input type="text" class="form-control" [(ngModel)]="group.description" name="Description" required placeholder="description"
+									#description="ngModel">
+								<small [hidden]="description.valid || description.pristine" class="alert alert-danger">
+                                Description is required
+                            </small>
+						</div>
+						<div class="form-group">
+							<label for="owner" class="control-label">Owner:</label>
+								<input readonly="readonly" type="text" class="form-control" [(ngModel)]="managedBy" name="managedBy" required placeholder="owner"
+									#owner="ngModel">
+								<small [hidden]="owner.valid || owner.pristine" class="alert alert-danger">
+									Owner is required
+								</small>
+
+						</div>
+
+					</form>
+
+			</div>
+			<div class="tab-pane fade" id="2a">
+				<div class="row">
+					<div *ngIf="!showAddNew" class="col-xs-6 col-sm-4">
+						<div *ngFor="let member of membersSelected; let i=index">
+							<label>
+                            <input type="checkbox"
+                            name="members"
+                            value="{{member.name}}"
+                            [checked]="member.selected"
+                            (change)="updateCheckedOptions(member.name, $event)"/>
+                            {{member.name}}
+                        </label>
+						</div>
+					</div>
+					<div *ngIf="!showAddNew" class="col-xs-4 col-sm-2">
+						<button [disabled]="!isAdmin" (click)="onSelectAll(true)" class="btn btn-default btn-member btnSelect">Select All</button>
+						<br>
+						<button [disabled]="!isAdmin" (click)="onSelectAll(false)" class="btn btn-default btn-member btnSelect">Unselect All</button>
+						<br>
+						<button [disabled]="!isAdmin" (click)="onDeleteSelected()" class="btn btn-default btn-member btnSelect">Delete</button>
+						<br>
+						<button [disabled]="!isAdmin" (click)="onAddNew()" class="btn btn-default btn-member btnSelect">Add New</button>
+						<br>
+						<button [disabled]="!isAdmin" (click)="onReset()" class="btn btn-default btn-member btnSelect">Reset</button>
+						<button [disabled]="!membersSelected.length" (click)="onDownload()" class="btn btn-default btn-member btnSelect">Download</button>
+					</div>
+
+				</div>
+				<div *ngIf="showAddNew" class="col-xs-12 col-sm-6">
+					<h4>Add New Members</h4>
+					<section></section>
+					<sh-search [exclusions]="searchResultExclusions" (errorResult)="onSearchErrorResult($event)" (cancel)="onAddNewClose()" (addSelected)="onAddSelected($event)" [showCheckbox]="showCheckbox" [title]="searchTitle"></sh-search>
+					<!--<button (click)="onAddNewClose()" class="btn btn-default btnSelect">Close</button>-->
+				</div>
+			</div>
+			<div>
+						<button [disabled]="!isAdmin" (click)="onUpdate()" class="btn btn-default">
+								Save
+							</button>
+						<button (click)="onCancel()" class="btn btn-default">
+								Cancel
+							</button>
+					</div>
+		</div>
+	</div>
+</div>
+<div bsModal #resultModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" aria-label="Close" (click)="resultModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+				<h4 class="modal-title">{{dialog.title}}</h4>
+			</div>
+			<div class="modal-body">
+				{{dialog.message}}
+				<br>
+			</div>
+			<div class="model-buttons">
+				<button (click)="onModalOk()">OK</button>
+			</div>
+		</div>
+	</div>
+</div>

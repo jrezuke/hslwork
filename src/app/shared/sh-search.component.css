@@ -1,0 +1,8 @@
+.clickableRow{
+    cursor:pointer;
+
+}
+
+tr:hover {
+  background-color: #ffa;
+}

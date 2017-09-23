@@ -1,0 +1,28 @@
+<div class="container">
+	<div [@visibility]="state">
+		<div class="panel panel-info">
+			<div class="pnl-heading" >Connect to Others</div>
+			<div class="panel-body">Use the form below to search for extranet members</div>
+		</div>
+		<sh-search (onSubmitEvent)="onSubmitEvent($event)" showSpinnerOnRowSelected=false (errorResult)="onErrorResult($event)" (rowSelected)="onRowSelected($event)" (cancel)="onCancel()" [showCheckbox]="showCheckbox"></sh-search>
+	</div>
+</div>
+<div bsModal #resultModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" aria-label="Close" (click)="resultModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+				<h4 class="modal-title">No Members Found</h4>
+			</div>
+			<div class="modal-body">
+				No members were found for your criteria.
+			</div>
+			<div class="model-buttons">
+				<button (click)="resultModal.hide()">Ok</button>
+			</div>
+
+		</div>
+	</div>
+</div>

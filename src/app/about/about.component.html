@@ -1,0 +1,49 @@
+<div [@visibility]="state">
+	<h2>About</h2>
+	<div class="row">
+		<section class="col-xs-6 col-sm-9">
+			<p class="about">
+				The <a href="http://www.hebrewseniorlife.org/research">Institute for Aging Research</a> (IFAR) employs common user credentials
+				accross all publically-accessible Web applications. These applications include electronic data capture, document sharing
+				and reporting. This security configuration allows IT and research teams to control and monitor user authentication accross
+				multiple services and platforms. Furthermore, this schema eliminates the need for separate username and passwords for
+				individual projects, and it allows non-HSL employess to obtain appropriate access to our collaborative tools without
+				comprimising coorporate intranet and mission critical systems.
+			</p>
+
+			<p>
+				IFAR research teams have autonomy and are permitted to authorize individuals access to applications or projects within the
+				extranet. However, all application users must first sign up for an IFAR extranet account. The @Html.ActionLink("sign
+				up", "register","account") process is easy and accounts are approved immediately. Users are identified by a unique email
+				address and username. Users are categorized automatically as HSL <i>employess</i> or <i>affiliates</i> of the organization.
+			</p>
+			<p>
+				Any public user may sign up for an extranet account. IFAR does not restrict account affiliate. However, new individual accounts
+				are not automatically allowed access to specific applications, services or projects therein. Application or project administrators
+				must explicity grant new users access. These adminstrators are responsible for maintaining rights and following corporate
+				security policy.
+			</p>
+			<p>
+				HSL IT and IFAR Research Administration may revoke or disable extranet accounts at any time. A disabled account will be unable
+				to access all services. The extranet system generates automatic email messages and audit trails when accounts are added,
+				updated, disabled or removed.
+			</p>
+			<p>
+				Please visit the contact page for additional information regarding technical support and policies.
+			</p>
+		</section>
+
+		<section class="rightSidebar col-xs-6 col-sm-3">
+			<h3>Applications</h3>
+			<p>
+				Extranet account holders may be permitted to access any or all of the Web applications hosted on the IFAR extranet.
+			</p>
+			<ul>
+				<li><a href="https://ifar-edc.hsl.harvard.edu/redcap">REDCap</a></li>
+				<li><a href="https://ifar-docs.hsl.harvard.edu/">Sharepoint Projects</a></li>
+				<li><a href="#">OpenClinica</a></li>
+			</ul>
+		</section>
+
+	</div>
+</div>

@@ -1,0 +1,77 @@
+<header >
+    <nav class="navbar navbar-default">
+        <div class="container-fluid topMenu">
+            <div class="pull-left">
+                <img src="./assets/images/logo_ifar.gif" alt="" border="0" width="375px" />
+            </div>
+            <div *ngIf="! _accountService.isUserAuthenticated()" class="dropdown pull-right ">
+                <a class="nav-item nav-link pull-right top-right-nav login" (click)="onLogon()">Login</a>
+            </div>
+            <div *ngIf="_accountService.isUserAuthenticated()" class="dropdown pull-right ">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <i class="fa fa-user"></i> {{_accountService.tokenInfo.displayName}}
+                    <span class="caret"></span>
+                </button>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li> <a (click)="onLogout()"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
+                    <li> <a [routerLink]="['/profile/']"><i class="fa fa-fw fa-user"></i> Profile</a></li>
+                    <li> <a href="javascript:;"><i class="fa fa-fw fa-gear"></i> Settings</a></li>
+                </ul>
+            </div>
+            <div class="clearRight clearLeft">
+                <nav class="pull-left">
+                    <ul class="nav nav-pills">
+                        <li role="presentation"><a routerLink='home'>Home</a></li>
+                        <li role="presentation"><a routerLink='about'>About</a></li>
+                        <li role="presentation"><a routerLink='contact'>Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </nav>
+</header>
+<div *ngIf="_accountService.showSpinner" class="divSpinner">
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+    <span class="sr-only">Loading...</span>
+</div>
+<div  class="container-fluid">
+    <div class="row">
+        <aside [@sideBarVisibility]="state"  class="col-sm-2 sidebar">
+            <div>
+
+                <a [routerLink]="['/register/']"><i class="fa fa-user-plus fa-4x" aria-hidden="true"></i><h3>Register New User</h3></a>
+
+            </div>
+            <div>
+                <a [routerLink]="['/password/reset/']"><i class="fa fa-key fa-4x" aria-hidden="true"></i><h3>Reset Password</h3></a>
+
+            </div>
+            <div>
+                <a [routerLink]="['/profile/']"><i class="fa fa-pencil-square-o fa-4x" aria-hidden="true"></i><h3>Edit My Profile</h3></a>
+
+            </div>
+            <div>
+                <a [routerLink]="['/groups/']"><i class="fa fa-users fa-4x" aria-hidden="true"></i><h3>Manage User Groups</h3></a>
+
+            </div>
+            <div>
+                <a [routerLink]="['/search/']"><i class="fa fa-search fa-4x" aria-hidden="true"></i><h3>Search</h3></a>
+            </div>
+
+        </aside>
+
+        <section class="col-sm-10">
+                <div *ngIf="_accountService.showSpinner" class="divSpinner">
+                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                        <span class="sr-only">Loading...</span>
+                    </div>
+            <router-outlet></router-outlet>
+        </section>
+    </div>
+</div>
+
+<footer class="container-fluid padme">
+    <!-- <ifar-footer></ifar-footer> -->
+</footer>

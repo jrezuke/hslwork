@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+.modal-header{
+  border-color: #e7e7e7;
+  background-color: #d9edf7;
+  background-image: -webkit-linear-gradient(white 0%, #d9edf7 100%);
+  background-image: -o-linear-gradient(white 0%, #d9edf7 100%);
+  background-image: linear-gradient(white 0%, #d9edf7 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffdfdfdf', GradientType=0);
+}
+.modal-body{
+    background-color: white;
+}
+.model-buttons{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.pnl-heading {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+

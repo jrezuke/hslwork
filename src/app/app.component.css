@@ -1,0 +1,27 @@
+footer{
+    border-color: #e7e7e7;
+    background-color: #d9edf7;
+  }
+  .sidebar{
+    border-color: #e7e7e7;
+    background-color: #d9edf7;
+    background-image: -webkit-linear-gradient(white 0%, #d9edf7 100%);
+    background-image: -o-linear-gradient(white 0%, #d9edf7 100%);
+    background-image: linear-gradient(white 0%, #d9edf7 100%);
+    background-repeat: repeat-y;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffdfdfdf', GradientType=0);
+  }
+
+  .navbar-default{
+    border-color: #e7e7e7;
+    background-color: #d9edf7;
+    background-image: -webkit-linear-gradient(white 0%, #d9edf7 100%);
+    background-image: -o-linear-gradient(white 0%, #d9edf7 100%);
+    background-image: linear-gradient(white 0%, #d9edf7 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffdfdfdf', GradientType=0);
+  }
+
+  a{
+    cursor: pointer;
+  }

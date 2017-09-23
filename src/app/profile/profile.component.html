@@ -1,0 +1,202 @@
+<div [@visibility]="state">
+	<div class="panel panel-info">
+		<div class="pnl-heading">User Details</div>
+		<div class="panel-body">
+			</div>
+	</div>
+	<div>
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#1a">Profile</a></li>
+			<li><a data-toggle="tab" href="#2a">Account</a></li>
+			<li><a data-toggle="tab" href="#3a">Password</a></li>
+			<li><a data-toggle="tab" href="#4a">My Groups</a></li>
+		</ul>
+		<div class="tab-content clearfix">
+			<div class="tab-pane fade in active" id="1a">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6">
+						<form novalidate (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm">
+							<div class="form-group">
+								<label for="firstName">First Name</label>
+								<input type="text" class="form-control" (change)="onNameChange($event.target.value)" [(ngModel)]="profileInfo.firstName" name="firstName" required placeholder="First Name"
+									#firstName="ngModel">
+								<small [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
+                                First Name is required
+                            </small>
+							</div>
+							<div class="form-group">
+								<label for="lastName">Last Name</label>
+								<input type="text" class="form-control" (change)="onNameChange($event.target.value)" [(ngModel)]="profileInfo.lastName" name="lastName" required placeholder="Last Name"
+									#lastName="ngModel">
+								<small [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
+                                Last Name is required
+                            </small>
+							</div>
+							<div class="form-group">
+								<label for="displayName">Display Name</label>
+								<input readonly="readonly" type="text" class="form-control" [(ngModel)]="profileInfo.displayName" name="displayName" required placeholder="Display Name"
+									#displayName="ngModel">
+								<small [hidden]="displayName.valid || displayName.pristine" class="alert alert-danger">
+                                Display Name is required
+                            </small>
+							</div>
+							<div class="form-group">
+								<label for="email">Email Address</label>
+								<input type="email" class="form-control" [(ngModel)]="profileInfo.emailAddress" name="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+									placeholder="Email Address" #email="ngModel">
+								<small [hidden]="email.valid || email.pristine" class="alert alert-danger">
+                                Email Address is not valid
+                            </small>
+							</div>
+							<button type="submit" class="btn btn-default" [disabled]="!registerForm.form.valid">Update</button>
+							<button (click)="onCancel()" type="button" class="btn ">Cancel</button>
+
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="2a">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6">
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<span>User name: </span> {{accountInfo.userName}}
+								</h3>
+							</div>
+							<div class="panel-body">
+								<table>
+									<tr>
+										<td>Date created</td>
+										<td>{{accountInfo.dateCreated}}</td>
+									</tr>
+									<tr>
+										<td>Date logged in</td>
+										<td>{{accountInfo.dateLoggedIn}}</td>
+									</tr>
+									<tr>
+										<td>User type</td>
+										<td>{{accountInfo.userType}}</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade " id="3a">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6">
+						<form novalidate (ngSubmit)="onResetPassword()" #resetPasswordForm="ngForm">
+							<div class="form-group">
+								<label for="password">Password</label>
+								<input type="password" class="form-control" name="password" [(ngModel)]="password" required validateEqual="confirmPassword"
+									reverse="true" #pwd="ngModel">
+								<small [hidden]="pwd.valid || pwd.pristine" class="text-danger">
+                                Password is required
+                            </small>
+
+							</div>
+							<div class="form-group">
+								<label for="confirmPassword">Confirm password</label>
+								<input type="password" class="form-control" name="confirmPassword" [(ngModel)]="confirmPassword" required validateEqual="password"
+									reverse="false" #confirmPwd="ngModel">
+								<small [hidden]="confirmPwd.valid || confirmPwd.pristine" class="text-danger">
+                                Password mismatch
+                            </small>
+
+								<button type="submit" class="btn btn-default" [disabled]="!resetPasswordForm.form.valid">Reset</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="4a">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								<h3 class="panel-title">Custom Groups</h3>
+							</div>
+
+							<div *ngFor="let group of groupsCustom" class="panel-body">
+								<button (click)="onGroupClick(group)" type="button" class="btn btn-default">{{group.name}}</button> </div>
+						</div>
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								<h3 class="panel-title">Application Groups</h3>
+							</div>
+
+							<div *ngFor="let group of groupsApplication" class="panel-body">
+								<button (click)="onGroupClick(group)" type="button" class="btn btn-default">{{group.name}}</button>
+
+							</div>
+						</div>
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								<h3 class="panel-title">System Groups</h3>
+							</div>
+
+							<div *ngFor="let group of groupsSystem" class="panel-body">
+								<button (click)="onGroupClick(group)" type="button" class="btn btn-default">{{group.name}}</button>
+
+							</div>
+						</div>
+					</div>
+					<div *ngIf="selectedGroup" class="col-xs-12 col-sm-4">
+
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								<h3 class="panel-title">{{selectedGroup.name}}</h3>
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-xs-6 col-sm-7">
+										<div>
+											<span>Description:</span><br>
+											<span class="altRow"> {{selectedGroup.description}}</span>
+										</div>
+										<div>
+											<span>Owner:</span><br>
+											<span class="altRow">{{selectedGroup.managedBy.username}}</span>
+										</div>
+										<!--<div> members is not being returned
+											<span>members</span>
+											<ul *ngFor="let member of selectedGroup.members">
+												<li>{{member}}</li>
+											</ul>
+
+										</div>-->
+									</div>
+									<div class="col-xs-6 col-sm-1">
+										<button (click)="onEditGroup()" [disabled]="accountInfo.userType==='affiliate'" >Edit</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div bsModal #resultModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="resultModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">{{dialog.title}}</h4>
+      </div>
+      <div class="modal-body">
+        {{dialog.message}}
+		<br>
+      </div>
+	  <div class="model-buttons">
+		  <button (click)="resultModal.hide()">OK</button>
+	  </div>
+    </div>
+  </div>
+</div>

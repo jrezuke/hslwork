@@ -1,0 +1,42 @@
+<div [@visibility]="state">
+	<div class="panel panel-info">
+			<div class="pnl-heading" >Manage User Groups</div>
+			<div class="panel-body">
+				Search for an existing goup or click on Add new group (admins only).<br>
+				<strong>Note: This is for employees only.</strong>
+			</div>
+		</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-6">
+			<form novalidate (ngSubmit)="onSubmit(searchForm)" #searchForm="ngForm">
+				<div class="form-group">
+					<label for="groupName">Group name:</label>
+					<input type="text" class="form-control" [(ngModel)]="group.name" name="groupName" placeholder="group name" required #groupName="ngModel">
+
+					<button type="submit" class="btn btn-default" [disabled]="!searchForm.form.valid">Search</button>
+					<button (click)="onCancel()" type="button" class="btn ">Cancel</button>
+					<button [disabled]="!isAdmin" (click)="onNewGroup()" type="button" class="btn btn-link">Add new group</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div bsModal #resultModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="resultModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">{{dialog.title}}</h4>
+      </div>
+      <div class="modal-body">
+        {{dialog.message}}
+		<br>
+      </div>
+	  <div class="model-buttons">
+		  <button (click)="onModalOk()">OK</button>
+	  </div>
+    </div>
+  </div>
+</div>
